@@ -32,7 +32,7 @@ def plot_map(xs,ys,cs,xm,ym,extent,detail,outfile):
              norm=plt.Normalize(min(cs),max(cs)))
   ax.legend(loc='lower left',bbox_to_anchor=(0.0,-0.084),framealpha=1.0,facecolor='#060606',labelcolor='#f1f1f1',edgecolor='#060606')
   ax.add_image(tiler, detail,zorder=1)
-  ax.set_extent(extend, ccrs.PlateCarree())
+  ax.set_extent(extent, ccrs.PlateCarree())
   plt.colorbar(sc,location='bottom',label='retrievability [%]',shrink=0.33,anchor=(0.72,2.11))
   plt.savefig(outfile,dpi=400,bbox_inches="tight")
   plt.close()
