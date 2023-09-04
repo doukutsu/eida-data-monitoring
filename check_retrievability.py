@@ -78,8 +78,8 @@ def main():
                       help='Day of the month to end the test (default=31).')
   parser.add_argument('-r', '--eida_routing', default=True, type=bool,
                       help='Switch to choose between eida routing and individual node clients (default=True).')
-  parser.add_argument('-o', '--output_filename', default="results.txt", type=str,
-                      help='Filename to write the results to (default="results.txt").')
+  parser.add_argument('-o', '--output_filename', default="results.json", type=str,
+                      help='Filename to write the results to (default="results.json").')
   args = parser.parse_args()
   # List of networks to exclude
   if args.exclude is not None:
@@ -173,7 +173,7 @@ def main():
                 try:
                   auxstart = realstart + day * (60*60*24)
                   auxend = realstart + (day+1) * (60*60*24)
-                  metrics = wfcatalog(net.code, sta.code, cha.code, auxstart, auxend)
+                  _ = wfcatalog(net.code, sta.code, cha.code, auxstart, auxend)
                   days_with_metrics += 1
                 except Exception as e:
                   print(e)
@@ -198,12 +198,10 @@ def main():
                           print('Error with metadata!')
                           break
                     data += data_temp
-                    data_exists = 'yes'
                     hours_with_data += 1
                   except Exception as e:
-                    print(year, channel, nodename, network, station, day, hour, e)
+                    print(y, cha, node, net, sta, day, hour, e)
                     print('----------------------------')
-                    data_exists = 'no'
               full_time = args.days * args.hours * args.minutes * 60
               if hours_with_data > 0: # check how much data was downloaded
                 locs = []
@@ -248,7 +246,7 @@ def main():
       except Exception as e:
        print('No Stations available at node: '+node)
        print(e)
-  with open('results.json','w') as output:
+  with open(args.output_filename,'w') as output:
     json.dump(results, output)
 
 if __name__ == '__main__':
