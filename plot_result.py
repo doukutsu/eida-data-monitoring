@@ -56,11 +56,17 @@ def inv_recurse(total,key,item):
 def main():
   desc = 'Script to plot station maps for the results of the EIDA data retrievability tests.'
   parser = argparse.ArgumentParser(description=desc)
+  parser.add_argument('-c', '--coords_filename', default="coordinates.json", type=str,
+                      help='Name of the file containing the station coordinates information (default="coordinates.json").')
+  parser.add_argument('-g', '--global_overview_map', default=True, type=bool,
+                      help='Switch for plotting the global overview map (default=True).')
+  parser.add_argument('-o', '--output_filename', default="retrievability", type=str,
+                      help='Filename to write the results to (default="retrievability").')
   parser.add_argument('-t', '--type', default='ret', type=str,
                       help='Type of the result to plot (actual retrievability (ret) or waveform catalogue info (wfc)) (default=ret).')
   args = parser.parse_args()
   print('Plotting %s map...' % 'retrievability' if args.type == 'ret' else 'waveform catalogue')
-  with open('coordinates.json') as coordsfile:
+  with open(args.coords_filename) as coordsfile:
     coords = json.load(coordsfile)
   results = []
   for _,infile in enumerate(glob.glob('./results*.json')):
@@ -101,8 +107,9 @@ def main():
     for stakey,staval in netval.items():
       xm.append(staval['longitude'])
       ym.append(staval['latitude'])
-  plot_map(xs,ys,cs,xm,ym,xp,yp,[-20, 46, 27.4, 76],7,'retrievability_europe.png')
-  plot_map(xs,ys,cs,xm,ym,xp,yp,[-180, 180, -90, 90],5,'retrievability_global.png')
+  plot_map(xs,ys,cs,xm,ym,xp,yp,[-20, 46, 27.4, 76],7,args.output_filename+'_europe.png')
+  if args.global_overview_map:
+    plot_map(xs,ys,cs,xm,ym,xp,yp,[-180, 180, -90, 90],5,args.output_filename+'_global.png')
   print('DONE!')
 
 if __name__ == '__main__':
