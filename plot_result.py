@@ -62,6 +62,8 @@ def main():
                       help='Switch for plotting the global overview map (default=True).')
   parser.add_argument('-o', '--output_filename', default="retrievability", type=str,
                       help='Filename to write the results to (default="retrievability").')
+  parser.add_argument('-r', '--results_directory', default=".", type=str,
+                      help='Directory with the result files (default=".").')
   parser.add_argument('-t', '--type', default='ret', type=str,
                       help='Type of the result to plot (actual retrievability (ret) or waveform catalogue info (wfc)) (default=ret).')
   args = parser.parse_args()
@@ -69,7 +71,7 @@ def main():
   with open(args.coords_filename) as coordsfile:
     coords = json.load(coordsfile)
   results = []
-  for _,infile in enumerate(glob.glob('./results*.json')):
+  for _,infile in enumerate(glob.glob(args.results_directory+'/results*.json')):
     with open(infile) as jsonfile:
       results.append(json.load(jsonfile))
   comb = {}
