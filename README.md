@@ -53,5 +53,6 @@ The results of the tests are plotted into a map with this script. Any JSON-file 
 The script accepts the following input arguments:
 - '-c', '--coords_filename', type=str, Name of the file containing the station coordinates information (default="coordinates.json").
 - '-g', '--global_overview_map', type=bool, Switch for plotting the global overview map (default=True).
+- '-o', '--output_filename', type=str, Filename to write the results to (default="retrievability").
 - '-r', '--results_directory', type=str, Directory with the result files (default=".").
 - '-t', '--type', default='ret', type=str, Type of the result to plot (actual retrievability (ret) or waveform catalogue info (wfc)) (default=ret).
