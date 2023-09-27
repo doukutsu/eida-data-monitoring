@@ -3,6 +3,7 @@ import argparse
 import glob
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
+from matplotlib.offsetbox import AnchoredText
 from cartopy.io.img_tiles import GoogleTiles
 import cartopy.crs as ccrs
 import numpy as np
