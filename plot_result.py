@@ -36,6 +36,9 @@ def plot_map(xs,ys,cs,xm,ym,xp,yp,extent,detail,outfile):
             labelcolor='#f1f1f1',edgecolor='#060606')
   ax.add_image(tiler, detail,zorder=1)
   ax.set_extent(extent, ccrs.PlateCarree())
+  text = AnchoredText('Images \u00A9 2023 TerraMetrics, Map Data \u00A9 2023 Google',
+                      loc=4, prop={'size': 12}, frameon=True)
+  ax.add_artist(text)
   plt.colorbar(sc,location='bottom',label='retrievability [%]',
                shrink=0.33,anchor=(0.72,2.11))
   plt.savefig(outfile,dpi=400,bbox_inches="tight")
