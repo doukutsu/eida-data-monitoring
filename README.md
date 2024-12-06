@@ -49,7 +49,7 @@ By default, the plotting script will expect the coordinate file to by named "*co
 
 ## 3. plot_result.py
 
-The results of the tests are plotted into a map with this script. Any JSON-file residing in the project folder containing the string "result" in its name will be loaded, and the mean value for each station will be calculated from them all. By default, a detail map of europe is produced, as well as a global overview map. The background is made up of satellite images provided by Google, via cartopy.
+The results of the tests are plotted into a map with this script. Any JSON-file residing in the project folder containing the string "results" in its name will be loaded, and the mean value for each station will be calculated from them all. By default, a detail map of europe is produced, as well as a global overview map. The background is made up of satellite images provided by Google, via cartopy.
 The script accepts the following input arguments:
 - '-c', '--coords_filename', type=str, Name of the file containing the station coordinates information (default="coordinates.json").
 - '-g', '--global_overview_map', type=bool, Switch for plotting the global overview map (default=True).
